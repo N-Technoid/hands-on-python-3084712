@@ -1,6 +1,8 @@
 import csv
 import json
 from pprint import pprint
+import re
+
 
 EINSTEIN = {
     "birthplace": "Germany",
@@ -13,8 +15,8 @@ EINSTEIN = {
 
 einstein_json = json.dumps(EINSTEIN)
 back_to_dict = json.loads(einstein_json)
-print(einstein_json)
-pprint(back_to_dict)
+#print(einstein_json)
+#pprint(back_to_dict)
 
 with open("laureates.csv", "r") as f:
     reader = csv.DictReader(f)
@@ -28,7 +30,9 @@ with open("laureates.csv", "r") as f:
 
 laureates_beginning_with_a = []
 # LinkedIn learner code here
-
+for laureate in laureates:
+    if laureate["name"][0] == "A":
+        laureates_beginning_with_a.append(laureate)
 
 with open("laureates.json", "w") as f:
     json.dump(laureates_beginning_with_a, f, indent=2)
